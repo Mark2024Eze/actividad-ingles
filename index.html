@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      position: relative; /* Añadido para el posicionamiento de la imagen */
+    }
+
+    h1 {
+      text-align: center;
+      color: #0066cc;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #0066cc;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .respuesta-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .respuesta {
+      width: 35px; /* Ajusta el ancho según tus preferencias */
+      margin-right: 10px;
+      margin-bottom: 10px; /* Ajusta la distancia vertical */
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 8px; /* Ajusta el espacio interno del cuadro de texto */
+      transition: border-color 0.3s ease, color 0.3s ease; /* Transición para el borde y el color del texto */
+      background-color: #fff; /* Fondo blanco para el cuadro de texto */
+      color: #333; /* Color de texto predeterminado */
+    }
+
+    .respuesta:hover {
+      border-color: #0066cc;
+      box-shadow: 0 0 5px rgba(0, 102, 204, 0.7);
+    }
+
+    .correcto {
+      border-color: green; /* Borde verde para respuestas correctas */
+      color: green; /* Texto verde para respuestas correctas */
+    }
+
+    .incorrecto {
+      border-color: red; /* Borde rojo para respuestas incorrectas */
+      color: red; /* Texto rojo para respuestas incorrectas */
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #005bb5;
+      transform: scale(1.05);
+    }
+
+    .limpiar-btn {
+      background-color: #e44d26;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .limpiar-btn:hover {
+      background-color: #d0451b;
+      transform: scale(1.05);
+    }
+
+    /* Estilo para la barra de progreso */
+    .progress-container {
+      margin-bottom: 20px;
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 20px;
+      width: 0;
+      background-color: #4CAF50;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+    }
+
+    /* Estilo para la imagen */
+    .imagen {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+      height: auto;
+      border-radius: 10%;
+    }
+
+    /* Agregado estilo para el pie de página */
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 10px;
+      border-top: 1px solid #ccc;
+    }
+
+    @media only screen and (max-width: 600px) {
+      body {
+        padding: 10px;
+        font-size: 14px; /* Reducir el tamaño de fuente para una mejor legibilidad en dispositivos móviles */
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 18px; /* Ajustar el tamaño de los encabezados para dispositivos móviles */
+      }
+
+      p {
+        margin-bottom: 20px;
+        line-height: 1.5; /* Ajustar el espaciado entre líneas para una mejor legibilidad en dispositivos móviles */
+      }
+
+      .respuesta {
+        margin-bottom: 10px; /* Reducir el margen inferior de los cuadros de respuesta */
+        width: calc(50% - 10px); /* Reducir el ancho de las respuestas para dispositivos móviles */
+        font-size: 14px; /* Reducir el tamaño de fuente de las respuestas para dispositivos móviles */
+      }
+
+      .progress-container {
+        margin-bottom: 20px;
+      }
+
+      footer {
+        margin-top: 20px;
+      }
+    }
+  </style>
+  <title>Ejercicio de Verbos</title>
+</head>
+<body>
+
+  <div style="display: flex; align-items: center;">
+    <img src="https://github.com/Mark2024Eze/Acrividades-1/blob/main/instituto%20overcome.jpg?raw=true" alt="Instituto Overcome" style="max-width: 100px; margin-right: 20px;">
+    <h1>Present simple tense - Overcome</h1>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar">0%</div>
+  </div>
+
+  <!-- Ejemplos -->
+  <h2>Ejemplo</h2>
+  <p>This is Alma. She <input type="text" class="respuesta" data-respuesta="is"> (to be) a chef. She <input type="text" class="respuesta" data-respuesta="is"> (to be) short and pretty. She <input type="text" class="respuesta" data-respuesta="works"> (work) in a restaurant. She <input type="text" class="respuesta" data-respuesta="cooks"> (cook) for people.</p>
+
+  <p>Every day she <input type="text" class="respuesta" data-respuesta="gets"> (get) up at six o'clock in the morning. She <input type="text" class="respuesta" data-respuesta="takes"> (take) a shower and <input type="text" class="respuesta" data-respuesta="puts"> (put) on her clothes. She <input type="text" class="respuesta" data-respuesta="doesn't eat"> (not eat) breakfast, she <input type="text" class="respuesta" data-respuesta="drinks"> (drink) coffee with milk. At seven o'clock, she <input type="text" class="respuesta" data-respuesta="drives"> (drive) to the market.</p>
+
+  <p>At the market, she <input type="text" class="respuesta" data-respuesta="buys"> (buy) lots of food. She <input type="text" class="respuesta" data-respuesta="buys"> (buy) fruit, vegetables and meat. Then she <input type="text" class="respuesta" data-respuesta="goes"> (go) to the restaurant. She <input type="text" class="respuesta" data-respuesta="cooks"> (cook) lunch from twelve o'clock to three o'clock. Then she <input type="text" class="respuesta" data-respuesta="takes"> (take) a break. At half past five, she <input type="text" class="respuesta" data-respuesta="starts"> (start) to cook dinner. She <input type="text" class="respuesta" data-respuesta="cooks"> (cook) pasta, pizza and steak for lots of people.</p>
+
+  <p>She <input type="text" class="respuesta" data-respuesta="finishes"> (finish) work at nine o'clock. She <input type="text" class="respuesta" data-respuesta="is"> (to be) very tired. She <input type="text" class="respuesta" data-respuesta="drives"> (drive) home and <input type="text" class="respuesta" data-respuesta="takes"> (take) a shower. She <input type="text" class="respuesta" data-respuesta="plays"> (play) computer games for an hour and then she <input type="text" class="respuesta" data-respuesta="goes"> (go) to bed.</p>
+
+  <!-- Botones para revisar y limpiar -->
+  <div>
+    <button onclick="revisar()">Revisar respuestas</button>
+    <button class="limpiar-btn" onclick="limpiar()">Limpiar respuestas</button>
+  </div>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>&copy; 2024 Práctica de Verbos en Inglés</p>
+  </footer>
+
+  <!-- Script JavaScript para la funcionalidad -->
+  <script>
+    function revisar() {
+      const respuestas = document.querySelectorAll('.respuesta');
+      let correctas = 0;
+      respuestas.forEach(input => {
+        const respuestaCorrecta = input.getAttribute('data-respuesta').toLowerCase();
+        if (input.value.trim().toLowerCase() === respuestaCorrecta) {
+          input.classList.add('correcto');
+          input.classList.remove('incorrecto');
+          correctas++;
+        } else {
+          input.classList.add('incorrecto'); // Añadir la clase 'incorrecto' si no es correcta
+          input.classList.remove('correcto'); // Remover la clase 'correcto' si no es correcta
+        }
+        input.disabled = true;  // Deshabilitar la edición después de revisar
+      });
+
+      const total = respuestas.length;
+      const progreso = Math.round((correctas / total) * 100);
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = `${progreso}%`;
+      progressBar.textContent = `${progreso}%`;
+    }
+
+    function limpiar() {
+      const respuestas = document.querySelectorAll('.respuesta');
+      respuestas.forEach(input => {
+        input.value = '';
+        input.classList.remove('correcto');
+        input.classList.remove('incorrecto');
+        input.disabled = false;  // Habilitar la edición al limpiar
+      });
+
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = '0%';
+      progressBar.textContent = '0%';
+    }
+  </script>
+</body>
+</html>
